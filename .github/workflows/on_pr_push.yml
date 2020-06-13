@@ -58,8 +58,8 @@ jobs:
         PGPASSWORD: postgres
       run: |
         curl ${TEST_DATA_URL} > ${TEST_DATA}
-        pg_restore -d postgres -C ${TEST_DATA}
-        psql -c "CREATE ROLE tegola_no_access LOGIN PASSWORD 'postgres'" -v
+        pg_restore -d postgres -c -C ${TEST_DATA} -v
+        psql -c "CREATE ROLE tegola_no_access LOGIN PASSWORD 'postgres'" 
         rm ${TEST_DATA}
 
     - name: Postgres Debug
