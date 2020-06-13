@@ -4,13 +4,16 @@
     <Header 
       v-if="capabilities"
       v-bind:capabilities="capabilities"/>
-    <LeftNav 
+    <button class="togglebutton" @click='tooglenavbar'>{{buttonText}}</button>
+
+    <LeftNav v-show='showMapsNav'
       v-if="capabilities"
       v-bind:capabilities="capabilities"/>
   </div>
 </template>
 
 <script>
+import "mapbox-gl/dist/mapbox-gl.css";
 import Header from './components/Header.vue';
 import LeftNav from './components/LeftNav/LeftNav.vue';
 import Mapbox from './components/Mapbox.vue';
@@ -32,6 +35,7 @@ export default {
     LeftNav,
     Mapbox
   },
+
   computed: {
     activeMap(){
       return store.activeMap
@@ -41,6 +45,16 @@ export default {
     }
   },
   methods:{
+    tooglenavbar() {
+      if (!this.showMapsNav){
+        this.buttonText = 'Hide Maps Layer'
+        this.showMapsNav = true
+      } else {
+      this.buttonText = 'Show Maps Layer'
+      this.showMapsNav = false
+      }
+    },
+
     // compareMaps compares two map objects for the sake of sorting alphabetically
     compareMaps(a, b){
       // ignore character casing
@@ -85,7 +99,11 @@ export default {
       })
   },
   data: function(){
-    return {}
+    return {
+      showMapsNav: true,
+      buttonText : 'Hide Maps Layer',
+
+    }
   }
 }
 </script>
@@ -98,6 +116,7 @@ body, html {
   margin: 0;
 }
 
+
 .float-r {
   float: right;
   padding-left: 1rem;
@@ -107,7 +126,21 @@ body, html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.togglebutton{
+  padding-left: 10px;
+  color: #ccc;
+  margin: 0;
+  z-index: 100;
+  position: fixed;
+  top: 59px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 14px;
+  background-color: rgba(0,0,0,0.5);
+  border-width: 0px;
+  outline: none;
 
+}
 .mapboxgl-ctrl-toggle-tile-boundaries {
   background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon --%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 1000 1000' enable-background='new 0 0 1000 1000' xml:space='preserve'%3E%3Cmetadata%3E Svg Vector Icons : http://www.onlinewebfonts.com/icon %3C/metadata%3E%3Cg%3E%3Cg transform='translate(0.000000,511.000000) scale(0.100000,-0.100000)'%3E%3Cpath d='M2060,4030v-980h-980H100v-326.7v-326.7h980h980v-980v-980h-980H100V110v-326.7h980h980v-980v-980h-980H100v-326.7V-2830h980h980v-980v-980h326.7h326.7v980v980h980h980v-980v-980H5000h326.7v980v980h980h980v-980v-980h326.7H7940v980v980h980h980v326.7v326.7h-980h-980v980v980h980h980V110v326.7h-980h-980v980v980h980h980v326.7V3050h-980h-980v980v980h-326.7h-326.7v-980v-980h-980h-980v980v980H5000h-326.7v-980v-980h-980h-980v980v980h-326.7H2060V4030z M4673.3,1416.7v-980h-980h-980v980v980h980h980V1416.7z M7286.7,1416.7v-980h-980h-980v980v980h980h980V1416.7z M4673.3-1196.7v-980h-980h-980v980v980h980h980V-1196.7z M7286.7-1196.7v-980h-980h-980v980v980h980h980V-1196.7z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }

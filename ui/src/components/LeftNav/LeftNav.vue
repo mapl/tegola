@@ -1,7 +1,7 @@
 <template>
-  <div id="left-nav">
+  <div  id="left-nav">
     <h2><span v-on:click="showAllMaps">Maps</span> <span v-if="activeMap">/ {{activeMap.name}}</span></h2>
-    <div class="container">
+    <div  class="container">
       <ul id="maps-list" v-if="!activeMap" >
         <MapRow
           v-for="map in capabilities.maps"
@@ -23,7 +23,8 @@
         v-bind:class="{active: inspectorIsActive}"><span class="dot"></span>Inspect Features
       </div>
     </div>
-  </div>
+    </div>
+
 </template>
 
 <script>
@@ -32,7 +33,8 @@ import MapLayerRow from './MapLayerRow.vue'
 import { store, mutations } from "@/globals/store";
 import { map } from "@/globals/map";
 
-const mapboxgl = require('mapboxgl');
+// const mapboxgl = require('mapboxgl');
+import mapboxgl from "mapbox-gl";
 
 export default {
   name: 'LeftNav',
@@ -46,8 +48,9 @@ export default {
   data(){
     return {
       inspectorIsActive: false,
-      inspector: null
-    }
+      inspector: null,
+
+          }
   },
   computed: {
     activeMap(){
@@ -58,6 +61,7 @@ export default {
     }
   },
   methods:{
+
     // toggleFeatureInspector handles binding and unbinding the mouse events 
     // necessary for the feature inspector
     toggleFeatureInspector(){
@@ -150,6 +154,7 @@ export default {
 }
 </script>
 
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #left-nav {
@@ -160,7 +165,8 @@ export default {
   display: flex;
   flex-flow: column;
   height: 90%;
-  top: 57px;
+  /*top: 57px;*/
+  top: 79px;
 }
 
 .container {

@@ -5,9 +5,10 @@
 <script>
 import { store, mutations } from "@/globals/store";
 import { mapSetters } from "@/globals/map";
-import ToggleTileBoundariesControl from "./MapboxControls"
+import mapboxgl from "mapbox-gl";
 
-const mapboxgl = require('mapboxgl');
+import ToggleTileBoundariesControl from "./MapboxControls"
+// const mapboxgl = require('mapboxgl');
 
 export default {
   name: 'Mapbox',
