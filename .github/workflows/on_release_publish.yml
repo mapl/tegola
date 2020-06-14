@@ -27,6 +27,17 @@ jobs:
         name: version
         path: ${{ github.workspace }}/version.txt
 
+    # converts viewer code (HTML, CSS, JS) into Go binary data
+    # this is run to make sure the client side code builds but the bindata
+    # is not used for compiling at this point
+    - name: Generate bindata
+      if: failure()      
+      run: |
+        cd ${GITHUB_WORKSPACE}/vendor/github.com/jteeuwen/go-bindata/go-bindata
+        go install
+        cd ${GITHUB_WORKSPACE}/server
+        go generate ./...
+
   build_nix:
     name: Build for Linux, MacOS and AWS Lambda
     needs: gen_version
