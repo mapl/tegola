@@ -50,7 +50,7 @@ jobs:
 
     - name: Load Postgres test data
       env:
-        TEST_DATA_URL: https://raw.githubusercontent.com/go-spatial/tegola-testdata/master/tegola.backup
+        TEST_DATA_URL: https://raw.githubusercontent.com/go-spatial/tegola-testdata/master/tegola.dump
         TEST_DATA: tegola.backup
         PGUSER: postgres
         PGHOST: localhost
