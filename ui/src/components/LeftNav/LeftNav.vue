@@ -1,7 +1,9 @@
 <template>
-  <div  id="left-nav">
+<!--  <div id="left-nav" class="sidebar">-->
+  <div id="left-nav" class="sidebar" :class="{ 'sidebar-collapsed' : isActive }">
+    <div class="toggle" @click="isActive = !isActive"></div>
     <h2><span v-on:click="showAllMaps">Maps</span> <span v-if="activeMap">/ {{activeMap.name}}</span></h2>
-    <div  class="container">
+    <div class="container">
       <ul id="maps-list" v-if="!activeMap" >
         <MapRow
           v-for="map in capabilities.maps"
@@ -10,7 +12,7 @@
         />
       </ul>
       <ul id="map-layers-list" v-if="activeMap && mapIsReady">
-        <MapLayerRow 
+        <MapLayerRow
           v-for="layer in activeMap.layers"
           v-bind:key="layer.name"
           v-bind:layer="layer"
@@ -19,7 +21,7 @@
     </div>
     <div id="left-nav-footer" v-if="activeMap">
       <div class="btn"
-        v-on:click="toggleFeatureInspector"  
+        v-on:click="toggleFeatureInspector"
         v-bind:class="{active: inspectorIsActive}"><span class="dot"></span>Inspect Features
       </div>
     </div>
@@ -49,7 +51,7 @@ export default {
     return {
       inspectorIsActive: false,
       inspector: null,
-
+      isActive: false,
           }
   },
   computed: {
@@ -61,14 +63,17 @@ export default {
     }
   },
   methods:{
+    toogleCollpase(){
 
-    // toggleFeatureInspector handles binding and unbinding the mouse events 
+    },
+
+    // toggleFeatureInspector handles binding and unbinding the mouse events
     // necessary for the feature inspector
     toggleFeatureInspector(){
 
       if(!this.inspector){
         // new popup instance
-        this.inspector = new mapboxgl.Popup();        
+        this.inspector = new mapboxgl.Popup();
       }
 
       if (!this.inspectorIsActive){
@@ -76,7 +81,7 @@ export default {
         this.inspectorIsActive = true;
       } else {
         map.off('mousemove', this.inspectFeatures);
-        
+
         this.inspectorIsActive = false;
         if (this.inspector.isOpen()){
           this.inspector.remove();
@@ -147,7 +152,7 @@ export default {
 
     // removes the hash (#) from the URL
     // https://stackoverflow.com/questions/1397329/how-to-remove-the-hash-from-window-location-url-with-javascript-without-page-r/5298684#5298684
-    removeHash(){ 
+    removeHash(){
       history.pushState("", document.title, window.location.pathname+ window.location.search);
     }
   }
@@ -157,16 +162,65 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#left-nav {
+/*#left-nav {*/
+/*  z-index: 100;*/
+/*  width: 300px;*/
+/*  !*position: fixed;*!*/
+/*  position:absolute;*/
+/*  background-color: rgba(0,0,0,0.5);*/
+/*  display: flex;*/
+/*  flex-flow: column;*/
+/*  height: 90%;*/
+/*  !*top: 57px;*!*/
+/*  top: 79px;*/
+
+/*}*/
+
+.sidebar {
   z-index: 100;
   width: 300px;
-  position: fixed;
+  /*position: fixed;*/
+  position:absolute;
   background-color: rgba(0,0,0,0.5);
   display: flex;
   flex-flow: column;
   height: 90%;
-  /*top: 57px;*/
-  top: 79px;
+  top: 57px;
+  /*top: 79px;*/
+
+}
+
+.toggle {
+  position:absolute;
+  /*right:5px;*/
+  right:0px;
+  top:5px;
+  width:20px;
+  height:30px;
+  /*background:white;*/
+  background: rgba(255,255,255,0.9) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAUCAQAAAAXDMSnAAAAi0lEQVR4AX3JQcqBURQG4O/+9WNG30D3vOfSDTuQsgcZyBakZANSzMVMBme3zsBI5/VMn4ZKLP5ki1E4tYejWpilxVUtzOEUD68odYmXR5BJNp/4zllXD2phllYvamHmirsayUkfJ5ruHzueTldC08kcT5YOY9xYujqQM03XKXuaLmEtNF1e1Nz89gbL+0do6OEwRwAAAABJRU5ErkJggg==) 7px center/7px 10px no-repeat;
+
+}
+/*.sidebar, .toggle {*/
+/*  transition:all .4s ease-in-out;*/
+/*  -webkit-transition:all .4s ease-in-out;*/
+/*}*/
+
+.sidebar  {
+  transition:all .2s ease-in-out;
+  /*-webkit-transition:all .2s ease-in-out;*/
+}
+
+.sidebar-collapsed {
+  transform:translateX(-100%);
+  /*-webkit-transform:translateX(-100%);*/
+}
+
+.sidebar-collapsed .toggle {
+  right:-20px;
+  transform:translateX(100%);
+  transform: rotate(180deg);
+  /*-webkit-transform:translateX(100%);*/
 }
 
 .container {
@@ -186,7 +240,7 @@ h2 {
   border-bottom: 1px solid #ccc;
 }
 h2 span {
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 #maps-list {
@@ -234,6 +288,6 @@ h2 span {
   margin-right: 6px;
 }
 .btn.active .dot{
-  background-color: #259b24;  
+  background-color: #259b24;
 }
 </style>
