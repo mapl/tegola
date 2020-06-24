@@ -1,7 +1,14 @@
 <template>
 <!--  <div id="left-nav" class="sidebar">-->
   <div id="left-nav" class="sidebar" :class="{ 'sidebar-collapsed' : isActive }">
-    <div class="toggle" @click="isActive = !isActive"></div>
+    <div class="toogle-background">
+    <div class="toggle" @click="isActive = !isActive">
+      <svg class="toggle-arrow" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>
+        <path fill-rule="evenodd" d="M10 8a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0 0 1h6.5A.5.5 0 0 0 10 8zm2.5 6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 1 0v11a.5.5 0 0 1-.5.5z"/>
+      </svg>
+    </div>
+    </div>
     <h2><span v-on:click="showAllMaps">Maps</span> <span v-if="activeMap">/ {{activeMap.name}}</span></h2>
     <div class="container">
       <ul id="maps-list" v-if="!activeMap" >
@@ -190,24 +197,69 @@ export default {
 
 }
 
+/*.toggle {*/
+/*  position:absolute;*/
+/*  !*right:5px;*!*/
+/*  right:0px;*/
+/*  top:5px;*/
+/*  width:20px;*/
+/*  height:30px;*/
+/*  !*background:white;*!*/
+/*  background: rgba(255,255,255,0.9) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAUCAQAAAAXDMSnAAAAi0lEQVR4AX3JQcqBURQG4O/+9WNG30D3vOfSDTuQsgcZyBakZANSzMVMBme3zsBI5/VMn4ZKLP5ki1E4tYejWpilxVUtzOEUD68odYmXR5BJNp/4zllXD2phllYvamHmirsayUkfJ5ruHzueTldC08kcT5YOY9xYujqQM03XKXuaLmEtNF1e1Nz89gbL+0do6OEwRwAAAABJRU5ErkJggg==) 7px center/7px 10px no-repeat;*/
+
+/*}*/
+
+/*.toggle {*/
+/*  position:absolute;*/
+/*  width: 0;*/
+/*  height: 0;*/
+/*  right:-22px;*/
+/*  top: -6px;*/
+/*  border: 10px solid transparent;*/
+/*  border-top: 10px solid;*/
+/*  border-right: 10px solid;*/
+/*  margin: 15px;*/
+/*  transform: rotate(-135deg);*/
+/*  color: white;*/
+/*}*/
+
 .toggle {
   position:absolute;
-  /*right:5px;*/
-  right:0px;
-  top:5px;
-  width:20px;
-  height:30px;
-  /*background:white;*/
-  background: rgba(255,255,255,0.9) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAUCAQAAAAXDMSnAAAAi0lEQVR4AX3JQcqBURQG4O/+9WNG30D3vOfSDTuQsgcZyBakZANSzMVMBme3zsBI5/VMn4ZKLP5ki1E4tYejWpilxVUtzOEUD68odYmXR5BJNp/4zllXD2phllYvamHmirsayUkfJ5ruHzueTldC08kcT5YOY9xYujqQM03XKXuaLmEtNF1e1Nz89gbL+0do6OEwRwAAAABJRU5ErkJggg==) 7px center/7px 10px no-repeat;
+  width: 32px;
+  height: 32px;
+  right:-7px;
+  top: 2px;
+  /*background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 166"><polygon fill="red" points="83 26.8 65.7 61.8 27.1 67.4 55 94.7 48.5 133.2 83 115 117.5 133.2 111 94.7 138.9 67.4 100.3 61.8 83 26.8 83 26.8"/></svg>');*/
+  /*background-image: url('data:image/svg+xml;charset=UTF-8,<svg class="bi bi-arrow-bar-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">  <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>  <path fill-rule="evenodd" d="M10 8a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0 0 1h6.5A.5.5 0 0 0 10 8zm2.5 6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 1 0v11a.5.5 0 0 1-.5.5z"/>  </svg>');*/
+  margin: 0px;
+  fill: white;
+  /*color: white;*/
 
 }
+
+.toggle-arrow{
+
+  fill:whitesmoke;
+  /*filter: brightness(0.2) sepia(1) hue-rotate(180deg) saturate(5);*/
+  /*background-color: black;*/
+}
+
+/*.toogle-background {*/
+/*  background: #c9c9c9;*/
+/*  width: 20px;*/
+/*  height: 36px;*/
+/*  right: 0px;*/
+/*  top: 0px;*/
+/*  position: absolute;*/
+
+/*}*/
 /*.sidebar, .toggle {*/
 /*  transition:all .4s ease-in-out;*/
 /*  -webkit-transition:all .4s ease-in-out;*/
 /*}*/
 
 .sidebar  {
-  transition:all .2s ease-in-out;
+  transition:all .5s ease-in-out;
   /*-webkit-transition:all .2s ease-in-out;*/
 }
 
@@ -216,12 +268,81 @@ export default {
   /*-webkit-transform:translateX(-100%);*/
 }
 
+/*.sidebar-collapsed .toggle {*/
+/*  !*right:-30px;*!*/
+/*  right: -30px;*/
+/*  !*transform:translateX(100%);*!*/
+/*  transform: rotate(180deg);*/
+/*  !*-webkit-transform:translateX(100%);*!*/
+/*}*/
+
 .sidebar-collapsed .toggle {
-  right:-20px;
-  transform:translateX(100%);
-  transform: rotate(180deg);
+  /*right:-30px;*/
+  animation-name: Wait-And-Start;
+  /*right: -30px;*/
+  animation-duration: 0.1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  /*animation-play-state: running;*/
+  /*transform:translateX(100%);*/
+  /*transform: rotate(180deg);*/
   /*-webkit-transform:translateX(100%);*/
 }
+
+.sidebar .toggle2 {
+  /*right:-30px;*/
+  animation-name: slideback;
+  /*right: -30px;*/
+  animation-duration: 0.1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  /*animation-direction: reverse;*/
+  /*animation-play-state: unset;*/
+  /*transform:translateX(100%);*/
+  /*transform: rotate(180deg);*/
+  /*-webkit-transform:translateX(100%);*/
+}
+
+
+@keyframes Wait-And-Start {
+  from { transform: rotate(0deg); }
+  to   {
+    transform: rotate(180deg);
+    right: -30px;
+  }
+}
+
+@keyframes slideback {
+  from { transform: rotate(0deg); }
+  to   {
+    transform: rotate(180deg);
+    /*right: -30px;*/
+  }
+}
+
+/*.sidebar-collapsed .toogle-background{*/
+/*  !*transform:translateX(-80%);*!*/
+/*  right: -20px;*/
+/*  !*-webkit-transform:translateX(-100%);*!*/
+/*}*/
+
+/*.sidebar-collapsed .toggle {*/
+/*  !*right:-30px;*!*/
+/*  right: -8px;*/
+/*  transform:translateX(100%);*/
+/*  transform: rotate(45deg);*/
+/*  !*-webkit-transform:translateX(100%);*!*/
+/*}*/
+
+
+
+/*.sidebar-collapsed .toogle-background {*/
+/*  right:-30px;*/
+/*  transform:translateX(100%);*/
+/*  transform: rotate(45deg);*/
+/*  !*-webkit-transform:translateX(100%);*!*/
+/*}*/
 
 .container {
   width: 100%;
