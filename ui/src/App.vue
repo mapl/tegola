@@ -5,7 +5,6 @@
       v-if="capabilities"
       v-bind:capabilities="capabilities"/>
 <!--    <button class="togglebutton" @click='tooglenavbar'>{{buttonText}}</button>-->
-
     <LeftNav v-show='showMapsNav'
       v-if="capabilities"
       v-bind:capabilities="capabilities"/>

@@ -1,14 +1,28 @@
 <template>
 <!--  <div id="left-nav" class="sidebar">-->
-  <div id="left-nav" class="sidebar" :class="{ 'sidebar-collapsed' : isActive }">
-    <div class="toogle-background">
-    <div class="toggle" @click="isActive = !isActive">
+    <div >
+<!--        <div class="toggle2" @click="isActive = !isActive"></div>-->
+        <div class="toggle2" @click="tooglesidebar2"
+              :class="mytoogleclass">
+            <svg class="toggle-arrow2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>
+                <path fill-rule="evenodd" d="M10 8a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0 0 1h6.5A.5.5 0 0 0 10 8zm2.5 6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 1 0v11a.5.5 0 0 1-.5.5z"/>
+            </svg>
+        </div>
+
+  <div id="left-nav" class="sidebar" :class="{
+    'sidebar-collapsed' : collapsed,
+    'sidebar-expanded': expanded }">
+<!--  <div id="left-nav" class="sidebar" :class="{ 'sidebar-collapsed' : isActive }">-->
+
+<!--    <div class="toggle" @click="isActive = !isActive">-->
+      <div class="toggle" @click="tooglesidebar">
+<!--      <div class="toggle" @click="isActive = !isActive">-->
       <svg class="toggle-arrow" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>
         <path fill-rule="evenodd" d="M10 8a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0 0 1h6.5A.5.5 0 0 0 10 8zm2.5 6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 1 0v11a.5.5 0 0 1-.5.5z"/>
       </svg>
-    </div>
-    </div>
+      </div>
     <h2><span v-on:click="showAllMaps">Maps</span> <span v-if="activeMap">/ {{activeMap.name}}</span></h2>
     <div class="container">
       <ul id="maps-list" v-if="!activeMap" >
@@ -31,6 +45,7 @@
         v-on:click="toggleFeatureInspector"
         v-bind:class="{active: inspectorIsActive}"><span class="dot"></span>Inspect Features
       </div>
+    </div>
     </div>
     </div>
 
@@ -58,7 +73,10 @@ export default {
     return {
       inspectorIsActive: false,
       inspector: null,
+      collapsed: false,
+      expanded: true,
       isActive: false,
+      mytoogleclass : "",
           }
   },
   computed: {
@@ -67,12 +85,37 @@ export default {
     },
     mapIsReady(){
       return store.mbglIsReady
-    }
+    },
+
+
   },
   methods:{
-    toogleCollpase(){
+    tooglesidebar(){
+      this.expanded = !this.expanded
+      this.collapsed = !this.collapsed
+    },
+
+      tooglesidebar2(){
+
+            if (this.mytoogleclass == "sidebar-collapsed2" ){
+                this.mytoogleclass = "sidebar-expanded2"
+            } else {
+                this.mytoogleclass = "sidebar-collapsed2"
+            }
+
+
+          // this.mytoogleclass = "sidebar-collapsed2"
+          this.expanded = !this.expanded
+          this.collapsed = !this.collapsed
 
     },
+     toggelsidebarclassmethod(){
+
+
+        return "sidebar-collapsed2"
+
+
+      },
 
     // toggleFeatureInspector handles binding and unbinding the mouse events
     // necessary for the feature inspector
@@ -229,12 +272,34 @@ export default {
   height: 32px;
   right:-7px;
   top: 2px;
+  cursor: pointer;
   /*background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 166"><polygon fill="red" points="83 26.8 65.7 61.8 27.1 67.4 55 94.7 48.5 133.2 83 115 117.5 133.2 111 94.7 138.9 67.4 100.3 61.8 83 26.8 83 26.8"/></svg>');*/
   /*background-image: url('data:image/svg+xml;charset=UTF-8,<svg class="bi bi-arrow-bar-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">  <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>  <path fill-rule="evenodd" d="M10 8a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0 0 1h6.5A.5.5 0 0 0 10 8zm2.5 6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 1 0v11a.5.5 0 0 1-.5.5z"/>  </svg>');*/
   margin: 0px;
   fill: white;
   /*color: white;*/
 
+}
+
+.toggle2 {
+    position:absolute;
+    width: 30px;
+    height: 30px;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 101;
+    margin: 0px;
+    /*background: white;*/
+    /*fill: white;*/
+    /*color: white;*/
+
+}
+
+.toggle2 .toggle-arrow {
+
+    fill: white;
+    transform: rotate(0deg);
 }
 
 .toggle-arrow{
@@ -259,90 +324,146 @@ export default {
 /*}*/
 
 .sidebar  {
-  transition:all .5s ease-in-out;
+  transition:all 1s ease-in-out;
   /*-webkit-transition:all .2s ease-in-out;*/
 }
+
 
 .sidebar-collapsed {
   transform:translateX(-100%);
   /*-webkit-transform:translateX(-100%);*/
 }
 
-/*.sidebar-collapsed .toggle {*/
-/*  !*right:-30px;*!*/
-/*  right: -30px;*/
-/*  !*transform:translateX(100%);*!*/
-/*  transform: rotate(180deg);*/
-/*  !*-webkit-transform:translateX(100%);*!*/
-/*}*/
+.sidebar-collapsed2 .toggle-arrow2
+{
+    animation-name: rotatearrow;
+    /*right: -30px;*/
+    animation-duration: 1s;
+    /*animation-delay: 0.5s;*/
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    /*animation-play-state: running;*/
+    /*transform: rotate(180deg);*/
+    /*-webkit-transform:translateX(100%);*/
+}
 
-.sidebar-collapsed .toggle {
-  /*right:-30px;*/
-  animation-name: Wait-And-Start;
+.sidebar-expanded2 .toggle-arrow2
+{
+    /*transform:translateX(-20%);*/
+
+    animation-name: rotatearrow2;
+    /*right: -30px;*/
+    animation-duration: 1s;
+    /*!*animation-delay: 0.5s;*!*/
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    /*animation-play-state: running;*/
+    /*transform: rotate(180deg);*/
+    /*-webkit-transform:translateX(100%);*/
+}
+
+
+
+@keyframes rotatearrow {
+    0% {
+        transform: rotate(0deg) ;
+        /*right: -30px;*/
+
+    }
+    100%   {
+        /*transform: translateX(-40px) rotate(180deg);*/
+        /*transform: translateX(60px) ;*/
+        /*right: -30px;*/
+        transform: rotate(180deg) ;
+    }
+}
+
+@keyframes rotatearrow2 {
+    0% {
+        transform: rotate(180deg) ;
+        /*right: -30px;*/
+
+    }
+    100%   {
+        /*transform: translateX(-40px) rotate(180deg);*/
+        /*transform: translateX(60px) ;*/
+        /*right: -30px;*/
+        transform: rotate(0deg) ;
+    }
+}
+
+.sidebar-collapsed .toggle-arrow
+{
+   animation-name: slidein;
   /*right: -30px;*/
-  animation-duration: 0.1s;
+  animation-duration: 0.5s;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
   animation-direction: normal;
   /*animation-play-state: running;*/
-  /*transform:translateX(100%);*/
   /*transform: rotate(180deg);*/
   /*-webkit-transform:translateX(100%);*/
 }
 
-.sidebar .toggle2 {
+/*.sidebar .toggle {*/
+/*  !*right:-30px;*!*/
+/*  animation-name: slideback;*/
+/*  !*right: -30px;*!*/
+/*  animation-duration: 1s;*/
+/*  animation-delay: 0.5s;*/
+/*  animation-fill-mode: forwards;*/
+/*  !*animation-fill-mode: none;*!*/
+/*  !*animation-direction: reverse;*!*/
+/*  !*animation-play-state: unset;*!*/
+/*  !*transform:translateX(100%);*!*/
+/*  !*transform: rotate(180deg);*!*/
+/*  transform:  rotate(180deg);*/
+/*  !*-webkit-transform:translateX(100%);*!*/
+/*}*/
+
+.sidebar-expanded .toggle-arrow {
   /*right:-30px;*/
   animation-name: slideback;
   /*right: -30px;*/
-  animation-duration: 0.1s;
+  animation-duration: 0.5s;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
+  /*animation-fill-mode: none;*/
   /*animation-direction: reverse;*/
   /*animation-play-state: unset;*/
   /*transform:translateX(100%);*/
   /*transform: rotate(180deg);*/
+  transform:  rotate(180deg);
   /*-webkit-transform:translateX(100%);*/
 }
 
 
-@keyframes Wait-And-Start {
-  from { transform: rotate(0deg); }
-  to   {
-    transform: rotate(180deg);
-    right: -30px;
+@keyframes slidein {
+  0% {
+    /*transform: rotate(0deg) ;*/
+    /*right: -30px;*/
+
+  }
+  100%   {
+    /*transform: translateX(-40px) rotate(180deg);*/
+    /*transform: translateX(60px) ;*/
+    /*right: -30px;*/
+    transform: translateX(20px) rotate(180deg) ;
   }
 }
 
 @keyframes slideback {
-  from { transform: rotate(0deg); }
-  to   {
-    transform: rotate(180deg);
+  0% {
+    transform:  rotate(180deg);
+    /*right: 30px;*/
+
+  }
+  100%   {
+    transform:  rotate(0deg);
     /*right: -30px;*/
   }
 }
 
-/*.sidebar-collapsed .toogle-background{*/
-/*  !*transform:translateX(-80%);*!*/
-/*  right: -20px;*/
-/*  !*-webkit-transform:translateX(-100%);*!*/
-/*}*/
-
-/*.sidebar-collapsed .toggle {*/
-/*  !*right:-30px;*!*/
-/*  right: -8px;*/
-/*  transform:translateX(100%);*/
-/*  transform: rotate(45deg);*/
-/*  !*-webkit-transform:translateX(100%);*!*/
-/*}*/
-
-
-
-/*.sidebar-collapsed .toogle-background {*/
-/*  right:-30px;*/
-/*  transform:translateX(100%);*/
-/*  transform: rotate(45deg);*/
-/*  !*-webkit-transform:translateX(100%);*!*/
-/*}*/
 
 .container {
   width: 100%;
@@ -353,6 +474,7 @@ export default {
 #left-nav-footer {
   flex: 0 1 40px;
 }
+
 
 h2 {
   padding: 10px;
