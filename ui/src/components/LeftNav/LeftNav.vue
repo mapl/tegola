@@ -1,22 +1,23 @@
 <template>
 <!--  <div id="left-nav" class="sidebar">-->
-    <div >
-<!--        <div class="toggle2" @click="isActive = !isActive"></div>-->
-        <div class="toggle2" @click="tooglesidebar2"
-              :class="mytoogleclass">
-            <svg class="toggle-arrow2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>
-                <path fill-rule="evenodd" d="M10 8a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0 0 1h6.5A.5.5 0 0 0 10 8zm2.5 6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 1 0v11a.5.5 0 0 1-.5.5z"/>
-            </svg>
-        </div>
+<!--    <div >-->
+<!--&lt;!&ndash;        <div class="toggle2" @click="isActive = !isActive"></div>&ndash;&gt;-->
+<!--        <div class="toggle2" @click="tooglesidebar2"-->
+<!--              :class="mytoogleclass">-->
+<!--            <svg class="toggle-arrow2" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">-->
+<!--                <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>-->
+<!--                <path fill-rule="evenodd" d="M10 8a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0 0 1h6.5A.5.5 0 0 0 10 8zm2.5 6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 1 0v11a.5.5 0 0 1-.5.5z"/>-->
+<!--            </svg>-->
+<!--        </div>-->
 
-  <div id="left-nav" class="sidebar" :class="{
-    'sidebar-collapsed' : collapsed,
-    'sidebar-expanded': expanded }">
+  <div id="left-nav" class="sidebar" :class="mytoogleclass">
+<!--       :class="{-->
+<!--    'sidebar-collapsed' : collapsed,-->
+<!--    'sidebar-expanded': expanded }"-->
 <!--  <div id="left-nav" class="sidebar" :class="{ 'sidebar-collapsed' : isActive }">-->
 
 <!--    <div class="toggle" @click="isActive = !isActive">-->
-      <div class="toggle" @click="tooglesidebar">
+      <div class="toggle" @click="tooglesidebar2" >
 <!--      <div class="toggle" @click="isActive = !isActive">-->
       <svg class="toggle-arrow" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>
@@ -47,7 +48,7 @@
       </div>
     </div>
     </div>
-    </div>
+<!--    </div>-->
 
 </template>
 
@@ -97,10 +98,10 @@ export default {
 
       tooglesidebar2(){
 
-            if (this.mytoogleclass == "sidebar-collapsed2" ){
-                this.mytoogleclass = "sidebar-expanded2"
+            if (this.mytoogleclass == "sidebar-collapsed" ){
+                this.mytoogleclass = "sidebar-expanded"
             } else {
-                this.mytoogleclass = "sidebar-collapsed2"
+                this.mytoogleclass = "sidebar-collapsed"
             }
 
 
@@ -236,9 +237,16 @@ export default {
   flex-flow: column;
   height: 90%;
   top: 57px;
+
   /*top: 79px;*/
 
 }
+
+/*::-webkit-scrollbar {*/
+/*    display: none; !* Chrome Safari *!*/
+/*}*/
+
+
 
 /*.toggle {*/
 /*  position:absolute;*/
@@ -273,34 +281,32 @@ export default {
   right:-7px;
   top: 2px;
   cursor: pointer;
-  /*background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 166"><polygon fill="red" points="83 26.8 65.7 61.8 27.1 67.4 55 94.7 48.5 133.2 83 115 117.5 133.2 111 94.7 138.9 67.4 100.3 61.8 83 26.8 83 26.8"/></svg>');*/
-  /*background-image: url('data:image/svg+xml;charset=UTF-8,<svg class="bi bi-arrow-bar-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">  <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L3.207 8l2.647-2.646a.5.5 0 0 0 0-.708z"/>  <path fill-rule="evenodd" d="M10 8a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0 0 1h6.5A.5.5 0 0 0 10 8zm2.5 6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 1 0v11a.5.5 0 0 1-.5.5z"/>  </svg>');*/
   margin: 0px;
   fill: white;
   /*color: white;*/
 
 }
 
-.toggle2 {
-    position:absolute;
-    width: 30px;
-    height: 30px;
-    left: 10px;
-    top: 10px;
-    cursor: pointer;
-    z-index: 101;
-    margin: 0px;
-    /*background: white;*/
-    /*fill: white;*/
-    /*color: white;*/
+/*.toggle2 {*/
+/*    position:absolute;*/
+/*    width: 30px;*/
+/*    height: 30px;*/
+/*    left: 10px;*/
+/*    top: 10px;*/
+/*    cursor: pointer;*/
+/*    z-index: 101;*/
+/*    margin: 0px;*/
+/*    !*background: white;*!*/
+/*    !*fill: white;*!*/
+/*    !*color: white;*!*/
 
-}
+/*}*/
 
-.toggle2 .toggle-arrow {
+/*.toggle2 .toggle-arrow {*/
 
-    fill: white;
-    transform: rotate(0deg);
-}
+/*    fill: white;*/
+/*    transform: rotate(0deg);*/
+/*}*/
 
 .toggle-arrow{
 
@@ -325,6 +331,7 @@ export default {
 
 .sidebar  {
   transition:all 1s ease-in-out;
+
   /*-webkit-transition:all .2s ease-in-out;*/
 }
 
@@ -334,12 +341,13 @@ export default {
   /*-webkit-transform:translateX(-100%);*/
 }
 
-.sidebar-collapsed2 .toggle-arrow2
+/*.sidebar-collapsed .toggle-arrow*/
+.sidebar-collapsed .toggle
 {
-    animation-name: rotatearrow;
+    animation-name: slindeinearrow;
     /*right: -30px;*/
-    animation-duration: 1s;
-    /*animation-delay: 0.5s;*/
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
     animation-fill-mode: forwards;
     animation-direction: normal;
     /*animation-play-state: running;*/
@@ -347,63 +355,72 @@ export default {
     /*-webkit-transform:translateX(100%);*/
 }
 
-.sidebar-expanded2 .toggle-arrow2
+.sidebar-expanded .toggle
 {
     /*transform:translateX(-20%);*/
 
-    animation-name: rotatearrow2;
+    animation-name: slideoutarrow;
     /*right: -30px;*/
-    animation-duration: 1s;
-    /*!*animation-delay: 0.5s;*!*/
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
     animation-fill-mode: forwards;
     animation-direction: normal;
     /*animation-play-state: running;*/
-    /*transform: rotate(180deg);*/
+    transform: translateX(20px) rotate(180deg);
+
     /*-webkit-transform:translateX(100%);*/
 }
 
 
 
-@keyframes rotatearrow {
+@keyframes slindeinearrow {
     0% {
-        transform: rotate(0deg) ;
+        /*transform: rotate(0deg) ;*/
         /*right: -30px;*/
+        /*transform: rotate(0deg);*/
+
 
     }
     100%   {
         /*transform: translateX(-40px) rotate(180deg);*/
         /*transform: translateX(60px) ;*/
         /*right: -30px;*/
-        transform: rotate(180deg) ;
+        transform: translateX(20px) rotate(180deg);
+
     }
 }
 
-@keyframes rotatearrow2 {
+@keyframes slideoutarrow {
     0% {
-        transform: rotate(180deg) ;
+        /*transform: rotate(180deg) ;*/
         /*right: -30px;*/
+        /*transform: translateX(0px)*/
+
 
     }
     100%   {
         /*transform: translateX(-40px) rotate(180deg);*/
         /*transform: translateX(60px) ;*/
         /*right: -30px;*/
-        transform: rotate(0deg) ;
+        /*transform: rotate(0deg) ;*/
+        /*transform: translateX(0px) rotate(0deg) ;*/
+        transform:  rotate(0deg);
+
     }
 }
 
-.sidebar-collapsed .toggle-arrow
-{
-   animation-name: slidein;
-  /*right: -30px;*/
-  animation-duration: 0.5s;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
-  animation-direction: normal;
-  /*animation-play-state: running;*/
-  /*transform: rotate(180deg);*/
-  /*-webkit-transform:translateX(100%);*/
-}
+/*.sidebar-collapsed .toggle-arrow*/
+/*{*/
+/*   animation-name: slidein;*/
+/*  !*right: -30px;*!*/
+/*  animation-duration: 0.5s;*/
+/*  animation-delay: 0.5s;*/
+/*  animation-fill-mode: forwards;*/
+/*  animation-direction: normal;*/
+/*  !*animation-play-state: running;*!*/
+/*  !*transform: rotate(180deg);*!*/
+/*  !*-webkit-transform:translateX(100%);*!*/
+/*}*/
 
 /*.sidebar .toggle {*/
 /*  !*right:-30px;*!*/
@@ -421,21 +438,21 @@ export default {
 /*  !*-webkit-transform:translateX(100%);*!*/
 /*}*/
 
-.sidebar-expanded .toggle-arrow {
-  /*right:-30px;*/
-  animation-name: slideback;
-  /*right: -30px;*/
-  animation-duration: 0.5s;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
-  /*animation-fill-mode: none;*/
-  /*animation-direction: reverse;*/
-  /*animation-play-state: unset;*/
-  /*transform:translateX(100%);*/
-  /*transform: rotate(180deg);*/
-  transform:  rotate(180deg);
-  /*-webkit-transform:translateX(100%);*/
-}
+/*.sidebar-expanded .toggle-arrow {*/
+/*  !*right:-30px;*!*/
+/*  animation-name: slideback;*/
+/*  !*right: -30px;*!*/
+/*  animation-duration: 0.5s;*/
+/*  animation-delay: 0.5s;*/
+/*  animation-fill-mode: forwards;*/
+/*  !*animation-fill-mode: none;*!*/
+/*  !*animation-direction: reverse;*!*/
+/*  !*animation-play-state: unset;*!*/
+/*  !*transform:translateX(100%);*!*/
+/*  !*transform: rotate(180deg);*!*/
+/*  transform:  rotate(180deg);*/
+/*  !*-webkit-transform:translateX(100%);*!*/
+/*}*/
 
 
 @keyframes slidein {
@@ -468,7 +485,9 @@ export default {
 .container {
   width: 100%;
   flex: 1 1 auto;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
+  overflow-y: auto;
+  /*overflow-y: hidden;*/
 }
 
 #left-nav-footer {
