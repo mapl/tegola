@@ -3,7 +3,7 @@
     <div class="layer-color"
       v-bind:style="{'background-color': getLayerColor(layer.name), visibility: visibility}"></div>
     <div class="layer-name">
-      {{layer.name}}
+     {{layer.name}}
     </div>
     <div class="layer-zoom-range">{{zoomRange}}</div>
   </li>

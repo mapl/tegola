@@ -5,10 +5,8 @@
 <script>
 import { store, mutations } from "@/globals/store";
 import { mapSetters } from "@/globals/map";
-import mapboxgl from "mapbox-gl";
-
 import ToggleTileBoundariesControl from "./MapboxControls"
-// const mapboxgl = require('mapboxgl');
+import mapboxgl from "mapbox-gl";
 
 export default {
   name: 'Mapbox',
@@ -35,7 +33,7 @@ export default {
 
     m.on('styledata', function(){
       if (!store.mbglIsReady){
-        mutations.setMbglIsReady(true);        
+        mutations.setMbglIsReady(true);
       }
     });
 
@@ -47,10 +45,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#map { 
-  position:absolute; 
-  top:0; 
-  bottom:0; 
-  width:100%; 
+#map {
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:100%;
 }
 </style>
