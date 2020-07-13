@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        go: ['1.14.4']
+        go: ['1.14']
 
     services:
       # label used to access the service container
@@ -58,8 +58,8 @@ jobs:
         PGPASSWORD: postgres
       run: |
         curl ${TEST_DATA_URL} > ${TEST_DATA}
-        pg_restore -d postgres -C ${TEST_DATA} -v
-        psql -c "CREATE ROLE tegola_no_access LOGIN PASSWORD 'postgres'" 
+        pg_restore -d postgres -C ${TEST_DATA}
+        psql -c "CREATE ROLE tegola_no_access LOGIN PASSWORD 'postgres'"
         rm ${TEST_DATA}
 
     - name: Postgres Debug
@@ -100,16 +100,15 @@ jobs:
       env:
         COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        go get github.com/mattn/goveralls
+        go install -mod=vendor github.com/mattn/goveralls
         $(go env GOPATH)/bin/goveralls -coverprofile=profile.cov -service=github
 
     # converts viewer code (HTML, CSS, JS) into Go binary data
     # this is run to make sure the client side code builds but the bindata
     # is not used for compiling at this point
-    - name: Generate bindata
-      if: failure()      
+    - name: Generate bindata 
       run: |
-        cd ${GITHUB_WORKSPACE}/vendor/github.com/jteeuwen/go-bindata/go-bindata
-        go install
-        cd ${GITHUB_WORKSPACE}/server
+        go install -mod=vendor github.com/jteeuwen/go-bindata/go-bindata
+        pushd ${GITHUB_WORKSPACE}/server
         go generate ./...
+        popd
