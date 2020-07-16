@@ -13,8 +13,6 @@ import LeftNav from "./components/LeftNav/LeftNav.vue";
 import Mapbox from "./components/Mapbox.vue";
 import { store, mutations } from "./globals/store";
 
-const axios = require("axios");
-
 // for production the apiRoot is empty so relative URLs are used
 let apiRoot = "";
 if (process.env.NODE_ENV != "production") {
@@ -55,32 +53,25 @@ export default {
     },
   },
   created: function () {
-    const me = this;
-
     // update the global store with the API root
     mutations.setApiRoot(apiRoot);
 
     // fetch the tegola capabilities endpoint. this is the root driver of
     // all subsequent steps
-    axios
-      .get(apiRoot + "capabilities")
-      .then(function (resp) {
+    fetch(apiRoot + "capabilities")
+      .then((resp) => resp.json())
+      .then((data) => {
         // sort our map list alphabetically
-        resp.data.maps.sort(me.compareMaps);
-
+        data.maps.sort(this.compareMaps);
         // on success update the capabilities data in the global store
-        mutations.setCapabilities(resp.data);
-
-        // check that we have maps configured in the response data
-        if (resp.data.maps.length === 1) {
+        mutations.setCapabilities(data);
+        if (data.maps.length === 1) {
           // find the first map in the capabilities and set it to the activeMap
-          mutations.setActiveMap(resp.data.maps[0]);
+          mutations.setActiveMap(data.maps[0]);
         }
       })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
+      // handle error
+      .catch((err) => console.log(err));
   },
   data: function () {
     return {};
